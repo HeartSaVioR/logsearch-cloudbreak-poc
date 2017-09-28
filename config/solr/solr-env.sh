@@ -63,7 +63,7 @@ ZK_CLIENT_TIMEOUT="60000"
 ENABLE_REMOTE_JMX_OPTS="false"
 
 # The script will use SOLR_PORT+10000 for the RMI_PORT or you can set it here
-RMI_PORT=18983
+RMI_PORT=18886
 
 # Anything you add to the SOLR_OPTS variable will be included in the java
 # start command line as-is, in ADDITION to other options. If you specify the
@@ -91,4 +91,4 @@ LOG4J_PROPS=/root/config/solr/log4j.properties
 SOLR_LOGS_DIR=/var/log/ambari-logsearch-solr
 
 # Sets the port Solr binds to, default is 8983
-SOLR_PORT=8983
+SOLR_PORT=8886

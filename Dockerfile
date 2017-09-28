@@ -33,6 +33,13 @@ ENV PATH $PATH:$JAVA_HOME/bin
 ENV SOLR_VERSION 5.5.2
 RUN wget --no-check-certificate -O /root/solr-$SOLR_VERSION.tgz http://public-repo-1.hortonworks.com/ARTIFACTS/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz
 RUN cd /root && tar -zxvf /root/solr-$SOLR_VERSION.tgz
+ENV SOLR_CONFIG_LOCATION /root/config/solr
+ENV SOLR_INCLUDE /root/config/solr/solr-env.sh
+
+ENV LOGSEARCH_CONFIG_LOCATION /root/config/logsearch
+ENV LOGFEEDER_CONFIG_LOCATION /root/config/logfeeder
+ENV LOGSEARCH_INCLUDE /root/config/logsearch/logsearch-env.sh
+ENV LOGFEEDER_INCLUDE /root/config/logfeeder/logfeeder-env.sh
 
 ADD bin/start.sh /root/start.sh
 RUN chmod +x /root/start.sh

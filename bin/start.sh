@@ -18,6 +18,11 @@ ZKCLI=$SOLR_SERVER_LOCATION/server/scripts/cloud-scripts/zkcli.sh
 
 command="$1"
 
+function load_solr_zk_config() {
+  cp -r /root/config/solr/solr.xml /root/logsearch_solr_index/data/
+  cp -r /root/config/solr/zoo.cfg /root/logsearch_solr_index/data/
+}
+
 function start_solr() {
   echo "Starting Solr..."
   /root/solr-$SOLR_VERSION/bin/solr start -cloud -s /root/logsearch_solr_index/data -verbose
@@ -25,13 +30,11 @@ function start_solr() {
 }
 
 function start_logsearch() {
-  source /root/config/logsearch/logsearch-env.sh
   $LOGSEARCH_SERVER_PATH/run.sh
   touch /var/log/ambari-logsearch-portal/logsearch-app.log
 }
 
 function start_logfeeder() {
-  source /root/config/logfeeder/logfeeder-env.sh
   $LOGFEEDER_PATH/run.sh
   touch /var/log/ambari-logsearch-logfeeder/logsearch-logfeeder.log
 }
@@ -51,6 +54,7 @@ function log() {
   esac
 }
 
+load_solr_zk_config
 start_solr
 start_logsearch
 start_logfeeder
