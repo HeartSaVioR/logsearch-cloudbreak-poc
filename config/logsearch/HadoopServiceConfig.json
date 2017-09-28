@@ -1,0 +1,51 @@
+{
+  "service": {
+    "cloudbreak": {
+      "label": "Cloudbreak",
+      "components": [
+        {
+          "name": "cloudbreak_server"
+        },
+        {
+          "name": "cloudbreak_web"
+        },
+        {
+          "name": "cloudbreak_auth",
+          "rowtype": "audit"
+        }
+      ],
+      "dependencies": [
+      ]
+    },
+    "uaa": {
+      "label": "UAA",
+      "components": [
+        {
+          "name": "uaa"
+        }
+      ],
+      "dependencies": [
+      ]
+    },
+    "consul": {
+      "label": "Colsul",
+      "components": [
+        {
+          "name": "consul"
+        }
+      ],
+      "dependencies": [
+      ]
+    },
+    "traefik": {
+      "label": "Traefik",
+      "components": [
+        {
+          "name": "traefik"
+        }
+      ],
+      "dependencies": [
+      ]
+    }
+  }
+}

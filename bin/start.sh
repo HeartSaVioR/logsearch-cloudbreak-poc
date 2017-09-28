@@ -18,9 +18,11 @@ ZKCLI=$SOLR_SERVER_LOCATION/server/scripts/cloud-scripts/zkcli.sh
 
 command="$1"
 
-function load_solr_zk_config() {
+function create_configs() {
   cp -r /root/config/solr/solr.xml /root/logsearch_solr_index/data/
   cp -r /root/config/solr/zoo.cfg /root/logsearch_solr_index/data/
+  
+  cp /root/config/logsearch/HadoopServiceConfig.json /etc/ambari-logsearch-portal/conf/
 }
 
 function start_solr() {
@@ -54,7 +56,7 @@ function log() {
   esac
 }
 
-load_solr_zk_config
+create_configs
 start_solr
 start_logsearch
 start_logfeeder
