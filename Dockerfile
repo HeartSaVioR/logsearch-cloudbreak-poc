@@ -17,7 +17,6 @@ RUN yum clean all -y && yum update -y
 RUN yum -y install vim wget rpm-build sudo which telnet tar openssh-server openssh-clients ntp git python-setuptools python-devel httpd lsof
 
 # download & install logsearch RPM packages
-RUN wget -cqO- https://github.com/oleewere/logsearch-cloudbreak-poc/releases/download/logsearch-rpms/ambari-infra-solr-2.5.1.0-0.noarch.rpm -O ambari-infra-solr.rpm && sudo rpm -i ambari-infra-solr.rpm
 RUN wget -cqO- https://github.com/oleewere/logsearch-cloudbreak-poc/releases/download/logsearch-rpms/ambari-infra-solr-client-2.5.1.0-0.noarch.rpm -O ambari-infra-solr-client.rpm && sudo rpm -i ambari-infra-solr-client.rpm
 RUN wget -cqO- https://github.com/oleewere/logsearch-cloudbreak-poc/releases/download/logsearch-rpms/ambari-logsearch-logfeeder-2.5.1.0-0.noarch.rpm -O ambari-logsearch-portal.rpm && sudo rpm -i ambari-logsearch-portal.rpm
 RUN wget -cqO- https://github.com/oleewere/logsearch-cloudbreak-poc/releases/download/logsearch-rpms/ambari-logsearch-portal-2.5.1.0-0.noarch.rpm -O ambari-logsearch-logfeeder.rpm && sudo rpm -i ambari-logsearch-logfeeder.rpm
@@ -30,4 +29,21 @@ RUN rpm -ivh jdk-8-linux-x64.rpm
 ENV JAVA_HOME /usr/java/default/
 ENV PATH $PATH:$JAVA_HOME/bin
 
+# install solr
+ENV SOLR_VERSION 5.5.2
+RUN wget --no-check-certificate -O /root/solr-$SOLR_VERSION.tgz http://public-repo-1.hortonworks.com/ARTIFACTS/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz
+RUN cd /root && tar -zxvf /root/solr-$SOLR_VERSION.tgz
+
+ADD bin/start.sh /root/start.sh
+RUN chmod +x /root/start.sh
+ADD config /root/config
+RUN chmod -R 777 /root/config
+
+RUN mkdir -p /var/run/ambari-logsearch-solr /var/log/ambari-logsearch-solr /var/run/ambari-infra-solr-client \
+  /var/log/ambari-infra-solr-client /root/logsearch_solr_index/data \
+  /var/run/ambari-logsearch-portal /var/log/ambari-logsearch-portal \
+  /var/run/ambari-logsearch-logfeeder /var/log/ambari-logsearch-logfeeder \
+  /var/log/cloudbreak-logs
+
 WORKDIR /root
+CMD /root/start.sh
