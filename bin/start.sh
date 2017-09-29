@@ -21,8 +21,9 @@ command="$1"
 function create_configs() {
   cp -r /root/config/solr/solr.xml /root/logsearch_solr_index/data/
   cp -r /root/config/solr/zoo.cfg /root/logsearch_solr_index/data/
-  
+
   cp /root/config/logsearch/HadoopServiceConfig.json /etc/ambari-logsearch-portal/conf/
+  cp /etc/ambari-logsearch-logfeeder/conf/grok-patterns /usr/lib/ambari-logsearch-logfeeder/classes/
 }
 
 function start_solr() {
