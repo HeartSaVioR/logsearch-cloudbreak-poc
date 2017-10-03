@@ -28,7 +28,7 @@
       ]
     },
     "consul": {
-      "label": "Colsul",
+      "label": "Consul",
       "components": [
         {
           "name": "consul"
