@@ -1,0 +1,30 @@
+{
+  "input": [
+    {
+      "type": "uaa",
+      "rowtype": "service",
+      "path": "/logs/cb-uaa-*.log"
+    }
+  ],
+  "filter": [
+    {
+      "filter": "grok",
+      "conditions": {
+        "fields": {
+          "type": [
+            "uaa"
+          ]
+        }
+      },
+      "multiline_pattern": "^(\\[%{DATESTAMP:logtime}\\])",
+      "message_pattern": "(?m)^\\[%{DATESTAMP:logtime}\\]%{SPACE}%{DATA}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}....%{SPACE}%{LOGLEVEL:level}%{SPACE}---%{SPACE}%{JAVACLASS:logger_name}:%{SPACE}%{GREEDYDATA:log_message}",
+      "post_map_values": {
+        "logtime": {
+          "map_date": {
+            "target_date_pattern": "yyyy-MM-dd HH:mm:ss,SSS"
+          }
+        }
+      }
+    }
+  ]
+}
