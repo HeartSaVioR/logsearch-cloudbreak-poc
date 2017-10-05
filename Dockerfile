@@ -49,8 +49,7 @@ RUN chmod -R 777 /root/config
 RUN mkdir -p /var/run/ambari-logsearch-solr /var/log/ambari-logsearch-solr /var/run/ambari-infra-solr-client \
   /var/log/ambari-infra-solr-client /root/logsearch_solr_index/data \
   /var/run/ambari-logsearch-portal /var/log/ambari-logsearch-portal \
-  /var/run/ambari-logsearch-logfeeder /var/log/ambari-logsearch-logfeeder \
-  /var/log/cloudbreak-logs
+  /var/run/ambari-logsearch-logfeeder /var/log/ambari-logsearch-logfeeder
 
 WORKDIR /root
 CMD /root/start.sh
