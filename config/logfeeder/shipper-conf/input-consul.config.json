@@ -16,12 +16,12 @@
           ]
         }
       },
-      "multiline_pattern": "^(%{DATESTAMP:logtime})",
-      "message_pattern": "(?m)^%{DATESTAMP:logtime}%{SPACE}\\[%{LOGLEVEL:level}\\]%{SPACE}%{GREEDYDATA:log_message}",
+      "multiline_pattern": "^(%{SPACE}%{DATESTAMP:logtime})",
+      "message_pattern": "(?m)^%{SPACE}%{DATESTAMP:logtime}%{SPACE}\\[%{LOGLEVEL:level}\\]%{SPACE}%{GREEDYDATA:log_message}",
       "post_map_values": {
         "logtime": {
           "map_date": {
-            "target_date_pattern": "yyyy-MM-dd HH:mm:ss,SSS"
+            "target_date_pattern": "yyyy/MM/dd HH:mm:ss"
           }
         }
       }
