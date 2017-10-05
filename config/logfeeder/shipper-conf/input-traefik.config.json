@@ -1,0 +1,31 @@
+{
+  "input": [
+    {
+      "type": "traefik",
+      "rowtype": "service",
+      "path": "/logs/traefik-*.log"
+    }
+  ],
+  "filter": [
+    {
+      "filter": "grok",
+      "conditions": {
+        "fields": {
+          "type": [
+            "traefik"
+          ]
+        }
+      },
+      "multiline_pattern": "^(%{DATESTAMP:logtime})",
+      "message_pattern": "(?m)^%{DATESTAMP:logtime}%{SPACE}%{JAVACLASS:logger_name}:%{NUMBER:line}:%{SPACE}%{GREEDYDATA:log_message}",
+      "post_map_values": {
+        "logtime": {
+          "map_date": {
+            "src_date_pattern" : "yyyy/MM/dd HH:mm:ss",
+            "target_date_pattern": "yyyy-MM-dd HH:mm:ss,SSS"
+          }
+        }
+      }
+    }
+  ]
+}
