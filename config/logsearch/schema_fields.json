@@ -6,6 +6,8 @@
     "cb_type": "Type",
     "cb_name": "Name",
     "cb_flow": "Flow",
+    "cb_address" : "IP Address",
+    "cb_email": "Email",
     "level": "Level",
     "type": "component"
   },

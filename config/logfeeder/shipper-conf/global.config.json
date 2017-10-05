@@ -1,7 +1,7 @@
 {
   "global":{
     "add_fields":{
-      "cluster":"cl1"
+      "cluster":"cloudbreak"
     },
     "source":"file",
     "tail":"true",
