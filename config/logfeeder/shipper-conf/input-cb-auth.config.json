@@ -1,0 +1,121 @@
+{
+  "input": [
+    {
+      "type": "cloudbreak_auth",
+      "rowtype": "audit",
+      "add_fields":{
+        "logType":"CloudbreakAudit",
+        "enforcer":"clodbreak-acl",
+        "repoType":"1",
+        "repo":"cloudbreak-auth"
+      },
+      "path": "/logs/cb-auth-*.log"
+    },
+    {
+      "type": "cloudbreak_web",
+      "rowtype": "audit",
+      "add_fields":{
+        "logType":"CloudbreakWebAudit",
+        "enforcer":"clodbreak-web-acl",
+        "repoType":"1",
+        "repo":"cloudbreak-web"
+      },
+      "path": "/logs/cb-web-*.log"
+    }
+  ],
+  "filter": [
+    {
+      "filter": "grok",
+      "conditions": {
+        "fields": {
+          "type": [
+            "cloudbreak_auth",
+            "cloudbreak_web"
+          ]
+        }
+      },
+      "multiline_pattern": "^(%{TIMESTAMP_ISO8601:evtTime})",
+      "message_pattern": "(?m)^%{TIMESTAMP_ISO8601:evtTime}%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[owner:%{DATA:reqData}\\]%{SPACE}\\[email:%{DATA:reqUser}\\]%{SPACE}(%{DATA:cliIP}%{SPACE}-%{SPACE}%{HTTP_METHOD:access}%{SPACE}%{DATA:resource}%{SPACE}HTTP/1\\.1%{SPACE}%{NUMBER:ws_status}%{SPACE}%{NUMBER:responseTime}%{SPACE}ms%{SPACE}\\[%{DATA}\\]|%{GREEDYDATA:reason})",
+      "post_map_values": {
+        "logtime": {
+          "map_date": {
+            "target_date_pattern": "yyyy-MM-dd'T'HH:mm:ss.SSSXX"
+          }
+        },
+        "ws_status":[
+          {
+            "map_fieldvalue":{
+              "pre_value":"200",
+              "post_value":"1"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"201",
+              "post_value":"1"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"202",
+              "post_value":"1"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"302",
+              "post_value":"1"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"304",
+              "post_value":"1"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"400",
+              "post_value":"0"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"401",
+              "post_value":"0"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"403",
+              "post_value":"0"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"404",
+              "post_value":"0"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"409",
+              "post_value":"0"
+            }
+          },
+          {
+            "map_fieldvalue":{
+              "pre_value":"500",
+              "post_value":"0"
+            }
+          },
+          {
+            "map_fieldname":{
+              "new_fieldname":"result"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
