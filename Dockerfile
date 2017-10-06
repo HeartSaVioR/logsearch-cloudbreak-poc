@@ -30,6 +30,7 @@ ENV JAVA_HOME /usr/java/default/
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # install solr
+#ENV SOLR_VERSION 6.6.0
 ENV SOLR_VERSION 5.5.2
 RUN wget --no-check-certificate -O /root/solr-$SOLR_VERSION.tgz http://public-repo-1.hortonworks.com/ARTIFACTS/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz
 RUN cd /root && tar -zxvf /root/solr-$SOLR_VERSION.tgz
