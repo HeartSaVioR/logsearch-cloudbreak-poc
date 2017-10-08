@@ -17,7 +17,7 @@
         }
       },
       "multiline_pattern": "^(%{DATESTAMP:logtime})",
-      "message_pattern": "(?m)^%{DATESTAMP:logtime}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{JAVAMETHOD:method}:%{NUMBER:line}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}-%{SPACE}\\[owner:%{DATA:cb_owner}\\]%{SPACE}\\[type:%{DATA:cb_type}\\]%{SPACE}\\[id:%{DATA:cb_id}\\]%{SPACE}\\[name:%{DATA:cb_name}\\]%{SPACE}\\[flow:%{DATA:cb_flow}\\]%{SPACE}%{GREEDYDATA:log_message}",
+      "message_pattern": "(?m)^%{DATESTAMP:logtime}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{JAVAMETHOD:method}:%{NUMBER:line}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}-%{SPACE}%{CB_SERVER_LOG_MESSAGE:log_message}",
       "post_map_values": {
         "logtime": {
           "map_date": {
