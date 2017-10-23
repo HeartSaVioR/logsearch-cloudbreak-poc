@@ -1,7 +1,7 @@
 {
   "global":{
     "add_fields":{
-      "cluster":"cloudbreak"
+      "cluster":"streamline"
     },
     "source":"file",
     "tail":"true",
