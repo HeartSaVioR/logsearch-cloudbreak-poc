@@ -66,9 +66,6 @@
       },
       "log4j_format":"",
       "multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-      #"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}(?<thread_name>[^\\[]+(\\[[\\-0-9]+ [\\-0-9]+\\])?)%{SPACE}\\[%{LOGLEVEL:level}\\]%{SPACE}%{GREEDYDATA:log_message}",
-      #"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}(?<logger_name>[a-zA-Z\\.]+)%{SPACE}(?<thread_name>[^\\[]+(\\[[\\-0-9]+ [\\-0-9]+\\])?)%{SPACE}\\[%{LOGLEVEL:level}\\]%{SPACE}%{GREEDYDATA:log_message}",
-      #"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}\\s(?<logger_name>[a-zA-Z\\.]+)\\s(?<thread_name>[^\\[]+(\\[[\\-0-9]+ [\\-0-9]+\\])?)\\s\\[%{LOGLEVEL:level}\\]\\s%{GREEDYDATA:log_message}",
       "message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}\\s%{STORM_LOGGER_NAME:logger_name}\\s%{STORM_THREAD_NAME:thread_name}\\s\\[%{LOGLEVEL:level}\\]\\s%{GREEDYDATA:log_message}",
       "post_map_values":{
         "logtime":{
