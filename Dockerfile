@@ -18,8 +18,8 @@ RUN yum -y install vim wget rpm-build sudo which telnet tar openssh-server opens
 
 # download & install logsearch RPM packages
 RUN wget -cqO- https://github.com/oleewere/logsearch-cloudbreak-poc/releases/download/logsearch-rpms/ambari-infra-solr-client-2.5.1.0-0.noarch.rpm -O ambari-infra-solr-client.rpm && sudo rpm -i ambari-infra-solr-client.rpm
-RUN wget -cqO- https://github.com/oleewere/logsearch-cloudbreak-poc/releases/download/logsearch-rpms/ambari-logsearch-logfeeder-2.5.1.0-0.noarch.rpm -O ambari-logsearch-portal.rpm && sudo rpm -i ambari-logsearch-portal.rpm
-RUN wget -cqO- https://github.com/oleewere/logsearch-cloudbreak-poc/releases/download/logsearch-rpms/ambari-logsearch-portal-2.5.1.0-0.noarch.rpm -O ambari-logsearch-logfeeder.rpm && sudo rpm -i ambari-logsearch-logfeeder.rpm
+RUN wget -cqO- https://github.com/oleewere/logsearch-cloudbreak-poc/releases/download/logsearch-rpms/ambari-logsearch-logfeeder-2.5.1.0-1.noarch.rpm -O ambari-logsearch-logfeeder.rpm && sudo rpm -i ambari-logsearch-logfeeder.rpm
+RUN wget -cqO- https://github.com/oleewere/logsearch-cloudbreak-poc/releases/download/logsearch-rpms/ambari-logsearch-portal-2.5.1.0-0.noarch.rpm -O ambari-logsearch-portal.rpm && sudo rpm -i ambari-logsearch-portal.rpm
 
 # install java
 ENV JAVA_VERSION 8u131
