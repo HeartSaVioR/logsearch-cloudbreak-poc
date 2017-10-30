@@ -46,12 +46,14 @@
     {
       "type":"storm_worker",
       "rowtype":"service",
-      "path":"/logs/*worker*.log"
+      "path":"/logs/workers-artifacts/*/*/worker.log",
+      "init_default_fields": "true"
     }
   ],
   "filter":[
     {
       "filter":"grok",
+      "sort_order": 1,
       "conditions":{
         "fields":{
           "type":[
@@ -65,8 +67,9 @@
         }
       },
       "log4j_format":"",
+      "deep_extract": "true",
       "multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-      "message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}\\s%{STORM_LOGGER_NAME:logger_name}\\s%{STORM_THREAD_NAME:thread_name}\\s\\[%{LOGLEVEL:level}\\]\\s%{GREEDYDATA:log_message}",
+      "message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}\\s%{JAVACLASS:logger_name}\\s(%{STORM_THREAD_NAME:thread_name}|%{DATA:thread_name})\\s\\[%{LOGLEVEL:level}\\]\\s%{GREEDYDATA:log_message}",
       "post_map_values":{
         "logtime":{
           "map_date":{
@@ -74,6 +77,21 @@
           }
         }
       }
+    },
+    {
+      "filter":"grok",
+      "sort_order": 2,
+      "conditions":{
+        "fields":{
+          "type":[
+            "storm_worker"
+          ]
+        }
+      },
+      "source_field": "path",
+      "deep_extract": "true",
+      "remove_source_field": "false",
+      "message_pattern":"/logs/workers-artifacts/%{STORM_TOPOLOGY_ID:storm_topology_id}/%{DATA:storm_worker_port}/worker\\.log"
     }
   ]
 }

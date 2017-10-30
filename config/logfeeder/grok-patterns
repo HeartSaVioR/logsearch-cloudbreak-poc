@@ -152,4 +152,9 @@ CUSTOM_SEPARATOR %{SPACE}\|%{SPACE}
 CB_SERVER_LOG_MESSAGE \[owner:%{DATA:cb_owner}\]%{SPACE}\[type:%{DATA:cb_type}\]%{SPACE}\[id:%{DATA:cb_id}\]%{SPACE}\[name:%{DATA:cb_name}\]%{SPACE}\[flow:%{DATA:cb_flow}\]%{SPACE}%{GREEDYDATA}
 
 STORM_LOGGER_NAME [a-zA-Z\.]+
-STORM_THREAD_NAME [^\[]+(\[[\-0-9]+ [\-0-9]+\])?
+STORM_COMPONENT_NAME [^\-]+
+STREAMLINE_TOPOLOGY_ID [0-9]+
+STREAMLINE_TOPOLOGY_NAME [^\-]+
+STORM_THREAD_NAME Thread\-[\-0-9]+\-*[\-0-9]*\-%{DATA:storm_component_name}\-executor%{DATA}
+STORM_TOPOLOGY_ID ((streamline\-%{DATA:streamline_topology_id}\-%{DATA:streamline_topology_name}\-[0-9]+\-[0-9]+)|([^/]+))
+STORM_WORKER_PORT [0-9]+
