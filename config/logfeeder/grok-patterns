@@ -155,6 +155,6 @@ STORM_LOGGER_NAME [a-zA-Z\.]+
 STORM_COMPONENT_NAME [^\-]+
 STREAMLINE_TOPOLOGY_ID [0-9]+
 STREAMLINE_TOPOLOGY_NAME [^\-]+
-STORM_THREAD_NAME ((Thread\-[\-0-9]+\-[\-0-9]+\-%{STORM_COMPONENT_NAME:ws_storm_component_name}\-executor)|([^\[]+(\[[\-0-9]+ [\-0-9]+\])?))
-STORM_TOPOLOGY_ID ((streamline\-%{STREAMLINE_TOPOLOGY_ID:ws_streamline_topology_id}\-%{STREAMLINE_TOPOLOGY_NAME:ws_streamline_topology_name}\-[0-9]+\-[0-9]+)|([^/]+))
+STORM_THREAD_NAME Thread\-[\-0-9]+\-*[\-0-9]*\-%{DATA:storm_component_name}\-executor%{DATA}
+STORM_TOPOLOGY_ID ((streamline\-%{DATA:streamline_topology_id}\-%{DATA:streamline_topology_name}\-[0-9]+\-[0-9]+)|([^/]+))
 STORM_WORKER_PORT [0-9]+

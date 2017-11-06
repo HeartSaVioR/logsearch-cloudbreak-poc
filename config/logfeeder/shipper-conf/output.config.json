@@ -8,7 +8,6 @@
       "collection": "hadoop_logs",
       "number_of_shards": "3",
       "splits_interval_mins": "2",
-      "skip_logtime": "true",
       "conditions": {
         "fields": {
           "rowtype": [
@@ -25,7 +24,6 @@
       "collection": "audit_logs",
       "number_of_shards": "3",
       "splits_interval_mins": "2",
-      "skip_logtime": "true",
       "conditions": {
         "fields": {
           "rowtype": [
