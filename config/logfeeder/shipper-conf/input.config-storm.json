@@ -91,7 +91,7 @@
       "source_field": "path",
       "deep_extract": "true",
       "remove_source_field": "false",
-      "message_pattern":"/log/workers-artifacts/%{STORM_TOPOLOGY_ID:storm_topology_id}/%{DATA:storm_worker_port}/worker\\.log"
+      "message_pattern":"/logs/workers-artifacts/%{STORM_TOPOLOGY_ID:storm_topology_id}/%{DATA:storm_worker_port}/worker\\.log"
     }
   ]
 }
